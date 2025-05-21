@@ -1,4 +1,9 @@
+import { useState } from 'react';
+import Search from './components/search';
+
 const App = () => {
+    const [searchTerm, setSearchTerm] = useState('');
+
     return (
         <main>
             <div className="pattern" />
@@ -10,7 +15,8 @@ const App = () => {
                         You'll Enjoy Without the Hassle
                     </h1>
                 </header>
-                <p>Search </p>
+                <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+                <h1 className="text-white">{searchTerm}</h1>
             </div>
         </main>
     );
