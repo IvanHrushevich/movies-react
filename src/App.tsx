@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
-import Search from './components/search';
+import Search from './components/Search';
 import Spinner from './components/Spinner';
+import MovieCard from './components/MovieCard';
+import type { MovieDto } from './models/MovieDto.model';
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -14,7 +16,7 @@ const API_BASE_URL = `https://api.themoviedb.org/3`;
 const App = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [movieList, setMovieList] = useState<Record<string, any>[]>([]);
+    const [movieList, setMovieList] = useState<MovieDto[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchMovies = async () => {
@@ -75,9 +77,7 @@ const App = () => {
                     ) : (
                         <ul>
                             {movieList.map((movie) => (
-                                <p key={movie.id} className="text-white">
-                                    {movie.title}
-                                </p>
+                                <MovieCard key={movie.id} movie={movie} />
                             ))}
                         </ul>
                     )}
